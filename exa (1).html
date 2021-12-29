@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+	<link rel="stlyesheet" href="style.css">
+	<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>  
+	</head>
+	<body ng-app="">
+	<div class="container">
+		<div class="signup-form">
+		<form name="myForm">
+		
+        <div class="form-group">
+			<div class="row">
+				<div class="col-xs-6">
+					<input type="text" class="form-control" name="FirstName" id="FirstName"  ng-model="FirstName"required="" placeholder="FirstName">
+					<span class="text-danger" ng-show="myForm.FirstName.$touched && myForm.FirstName.$invalid">First Name is required.</span>
+				</div>
+				<div class="col-xs-6">
+					<input type="text" class="form-control" name="LastName" id="LastName" ng-model="LastName" required="" placeholder="LastName">
+					<span class="text-danger" ng-show="myForm.LastName.$touched && myForm.LastName.$invalid">Last Name is required.</span><br>
+				</div>        	
+			</div>
+		<div class="row">	
+        <div class="col-xs-12">
+					<input type="email" class="form-control" id="Email" name="Email" ng-model="Email"required="" placeholder="enter your Email">
+					<span class="text-danger" ng-show="myForm.Email.$touched && myForm.Email.$invalid">Error.</span><br>
+
+		</div>
+		</div>
+		<div class="row">
+		<div class="col-xs-6">
+					<input id="Password" class="form-control" type="password"name="Password" ng-model="Password"required="" placeholder="password">
+					<span class="text-danger" ng-show="myForm.Password.$touched && myForm.Password.$invalid">Enter your password</span>
+		</div>
+		<div class="col-xs-6">
+					<input id="conform_Password"type="password" class="form-control" name="conform_Password" ng-model="conform_Password"required=""placeholder="Enter conform_Password">
+					<span class="text-danger" ng-show="myForm.conform_Password.$touched && myForm.conform_Password.$invalid">Enter your conform password</span><br>
+		</div>
+		</div>   
+		<div class="row">
+		<div class="col-xs-6">
+					<input type="text" id="CNIC" class="form-control" name="CNIC" maxlength="13" ng-model="CNIC"required="" placeholder="35302-XXXXXXX-X">
+					<span class="text-danger" ng-show="myForm.CNIC.$touched && myForm.CNIC.$invalid">Enter your CNIC number</span>
+		</div>
+		<div class="col-xs-6">
+					<input type="text"class="form-control" id="age" maxlength="3" ng-model="age"required="" placeholder="Enter your age">
+					<span class="text-danger" ng-show="myForm.age.$touched && myForm.age.$invalid">Enter your age</span><br>
+		</div>
+		</div>  
+		<div class="row">
+		<div class="col-xs-6">
+					 Male:
+					<input type="radio"name="gender" id="male">
+					Female:
+					<input type="radio"name="gender"  id="Female">
+		</div>
+		
+		<div class="col-xs-6">
+					<input type="date" id="myDate" name="date" ng-model="date" class="form-control"required="">
+					<span class="text-danger" ng-show="myForm.date.$touched && myForm.date.$invalid">field is required</span><br>
+		</div>
+		</div> 
+		<div class="row">
+			<div class="col-xs-6">
+			country:
+				<select name="country" id="country" required onchange="setStates();" >
+					<option value="">Select country</option>
+					<option value="Pakistan">Pakistan</option>
+					<option value="Canada">Canada</option>
+					<option value="United States">United States</option>
+				</select>
+		
+			state:
+				<select name="state" id="state" required onchange="setCities();">
+					<option value="">Please select a state</option>
+				</select>
+			
+			city:
+				<select name="city" required  id="city">
+					<option value="">Please select a City</option>
+				</select>
+			</div>
+		</div>		<br>
+        
+		<div class="form-group">
+            <button type="submit" onclick="mainFunction()" class="btn btn-success btn-lg btn-block">Register Now</button>
+        </div>
+    </form>
+
+</div>
+</div>
+</body>
+</html>  
+<script>
+				
+				function mainFunction()
+				{
+					firstName();		
+				} 
+					function firstName()
+					{
+						var FirstName = document.getElementById("FirstName").value;
+					
+								if(FirstName=="")
+										{
+										alert("Please Enter Your First Name");
+										}
+								else if (!FirstName.match(/^[a-zA-Z]+$/)) 
+										{
+										alert('Only alphabets are allowed in FirstName'); 
+										}
+								else if ((FirstName.length < 3) || (FirstName.length > 15))
+										{
+										alert("Your Character must be 3 to 15 Character in FirstName Field");
+										}
+								else{
+								 LastName();
+										}
+					}		
+					function LastName()	
+					{
+						var LastName=document.getElementById("LastName").value;
+						
+								if(LastName=="")
+										{
+										alert("Please Enter Your Last Name");
+										}
+								else if (!LastName.match(/^[a-zA-Z]+$/)) 
+										{
+										alert('Only alphabets are allowed in LastName'); 
+										}
+								else if ((LastName.length < 3) || (LastName.length > 15))
+										{
+										alert("Your Character must be 3 to 15 Character in LastName Field");
+										}
+								else{
+									email();
+								}
+					}
+					function email()
+					{
+						var email=document.getElementById("Email").value;
+								if(email=="")
+									{
+										alert("please enter Email");
+									}
+								else if(!email.match(/^([a-zA-Z0-9_\.\-])+\@(([a-z0-9\-])+\.)+([a-z0-9]{2,4})+$/))
+									{
+										alert("please enter correct email");
+									}else{
+										password();
+									}
+				
+					}
+					function password() 
+					{
+						var password = document.getElementById("Password").value;
+						var confirmPassword = document.getElementById("conform_Password").value;
+							if (password != confirmPassword)
+									{
+									alert("Passwords do not match.");
+									}
+							else if((password=="")||(confirmPassword==""))
+									{
+									alert("password is required");
+									}
+							else if((password.length<8)||(password.length>15))
+									{
+									alert("password must be 8 to 15 character");
+					
+									}else{
+									cnic();
+									}
+					}
+					function cnic()
+					{
+				
+						var cnic=document.getElementById("CNIC").value;
+							if(cnic=="")
+									{
+									alert("CNIC number is required");
+									}
+							
+							else if(!cnic.match(/^\d{5}\d{7}\d{1}$/))
+									{
+									alert("CNIC Number is incorrect");
+									}else{
+									age();
+									}
+					}
+					function age()
+					{
+						var age=document.getElementById("age").value;
+							if(age=="")
+									{
+									alert("age is required");
+					
+									}	
+							else if(age<=0)
+									{
+									alert("invalid your age");
+									}	
+							else if(age>999)
+									{
+									alert("invalid your age");
+									}
+							else{
+								gender();
+							}		
+					}
+					function gender()
+					{
+						var male=document.getElementById("male").value;
+						var female=document.getElementById("Female").value;
+							if((male=="")||(female=""))
+								{
+									alert("Select Either male or Female");
+								}
+								myFunction();
+					} 
+					function myFunction() 
+						{
+						var x = document.getElementById("myDate").value;
+							if(x=="")
+								alert("please select date of birth");
+							else{
+								alert("successfully submitted");
+							}	
+						}
+					
+					var states = new Array();
+ 
+					states['Canada'] = new Array('Alberta','British Columbia','Ontario');
+					states['Pakistan'] = new Array('Punjab','Sindh','Balochistan','Khyber-Pakhtunkhwa');
+					states['United States'] = new Array('California','Florida','New York');
+					 
+					 
+					// City lists
+					var cities = new Array();
+					 
+					cities['Canada'] = new Array();
+					cities['Canada']['Alberta']          = new Array('Edmonton','Calgary');
+					cities['Canada']['British Columbia'] = new Array('Victoria','Vancouver');
+					cities['Canada']['Ontario']          = new Array('Toronto','Hamilton');
+					 
+					cities['Pakistan'] = new Array();
+					cities['Pakistan']['Punjab'] = new Array('Lahore','Arifwala','Okara','Attock');
+					cities['Pakistan']['Sindh']       = new Array('Karachi','Kashmore','Thatta','Mirpur Khas');
+					cities['Pakistan']['Balochistan']         = new Array('Quetta','Khuzdar','Turbat','Chaman');
+					cities['Pakistan']['Khyber-Pakhtunkhwa']         = new Array('Akora Khattak','Aliabad','Aloch','Alpuri');
+					 
+					cities['United States'] = new Array();
+					cities['United States']['California'] = new Array('Los Angeles','San Francisco');
+					cities['United States']['Florida']    = new Array('Miami','Orlando');
+					cities['United States']['New York']   = new Array('Buffalo','new York');
+					 
+					 
+					function setStates() {
+					  cntrySel = document.getElementById('country');
+					  stateList = states[cntrySel.value];
+					  changeSelect('state', stateList, stateList);
+					  setCities();
+					  
+					 
+					}
+					 
+					function setCities() {
+					  cntrySel = document.getElementById('country');
+					  stateSel = document.getElementById('state');
+					  cityList = cities[cntrySel.value][stateSel.value];
+					  changeSelect('city', cityList, cityList);
+					  
+					}
+					 
+					function changeSelect(fieldID, newOptions, newValues)
+					{ 
+					 
+					  selectField = document.getElementById(fieldID);
+					  selectField.options.length = 0;
+					  for (i=0; i<newOptions.length; i++) {
+						selectField.options[selectField.length] = new Option(newOptions[i], newValues[i]);
+						
+					  }
+					}
+					 
+					function addLoadEvent(func) {
+					  var oldonload = window.onload;
+					  if (typeof window.onload != 'function') {
+						window.onload = func;
+						
+					  } else {
+						window.onload = function() {
+						  if (oldonload) {
+							oldonload();
+							
+						  }
+						  func();
+						  
+						}
+						
+					  }
+					  
+					}
+					 
+					addLoadEvent(function() {
+					  setStates();
+					  
+					}
+					
+					);	
+					
+				
+			</script>
+                          
+						  
